@@ -1,0 +1,11 @@
+[project]
+name = "keithley-6517b-controller"
+version = "0.1.0"
+description = "Scripts to controll Keithley 6517B using SCPI commands"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "black>=24.10.0",
+    "gpib-ctypes>=0.3.0",
+    "pyvisa-py>=0.7.2",
+]
