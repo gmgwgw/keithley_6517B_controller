@@ -71,7 +71,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "black" },
+    { name = "black", specifier = ">=24.10.0" },
     { name = "gpib-ctypes", specifier = ">=0.3.0" },
     { name = "pyvisa-py", specifier = ">=0.7.2" },
 ]
