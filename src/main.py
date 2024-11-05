@@ -39,16 +39,16 @@ class Keithley6517B:
         cros = self.inst.query("ROUT:CLOS?")
         return cros
 
-    def set_func_and_range(self, func: str, rang: str):
+    def set_func_and_range(self, func: str, urim: str):
         """set measuring mode and range
 
         Args:
             func (str): measuring mode to be set (e.g. CURR)
-            rang (str): mearuring range
+            urim (str): the upper limit for the measurement
         """
 
         self.inst.write(":SENS:FUNC '{}'".format(func))
-        self.inst.write(":SENS:CURR:RANG: {}".format(rang))
+        self.inst.write(":SENS:CURR:RANG AUTO")
         return
 
     def conf_staircase_sweep(
@@ -100,8 +100,8 @@ if __name__ == "__main__":
     print(keithley.close_channel(0))
 
     keithley.set_func_and_range("CURR", 1e-6)
-
-    keithley.conf_staircase_sweep(0, -0.5, 0.01, 1)
+    # minimum step size is 5 mV
+    keithley.conf_staircase_sweep(0, -0.5, 0.005, 1)
 
     keithley.run_staircase_sweep()
 
