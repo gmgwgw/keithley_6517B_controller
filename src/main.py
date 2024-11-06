@@ -28,6 +28,7 @@ class Keithley6517B:
         # *SRE: sets or clears the bits of the service request enabe register
         # 1: Set MSB(most significant bit) (bit 0)
         self.inst.write("*SRE 1")
+        return
 
     def close_channel(self, ch_num: int):
         """close channel of 6522 scan card.
@@ -35,8 +36,8 @@ class Keithley6517B:
         Args:
             ch_num (int): number of the channel to be closed.
         """
-        self.inst.write("ROUT:CLOS {}".format(ch_num))
-        cros = self.inst.query("ROUT:CLOS?")
+        self.inst.write("ROUT:CLOS (@{})".format(ch_num))
+        cros = self.inst.query("ROUT:CLOS:STAT?")
         return cros
 
     def set_func_and_range(self, func: str, urim: str):
@@ -48,7 +49,7 @@ class Keithley6517B:
         """
 
         self.inst.write(":SENS:FUNC '{}'".format(func))
-        self.inst.write(":SENS:CURR:RANG AUTO")
+        self.inst.write(":SENS:CURR:RANG:AUTO 1")
         return
 
     def conf_staircase_sweep(
@@ -64,19 +65,20 @@ class Keithley6517B:
         # IMM: immediate control source
         self.inst.write(":TSEQ:TSO IMM")
         # *OPC?: returns 1 after all pending operations are completed
-        opc = self.inst.query("*OPC?")
-        return opc
+        # opc = self.inst.query("*OPC?")
+        # return opc
+        return
 
     def run_staircase_sweep(self):
         # :TSEQ:ARM: arms the selected test sequence
         self.inst.write(":TSEQ:ARM")
         time.sleep(1)
-        self.inst.write("*TRG")
-        try:
-            self.inst.wait_for_srq(timeout=None)
-        except KeyboardInterrupt:
-            print("interrupted")
-        return
+        # self.inst.write("*TRG")
+        # try:
+        #     self.inst.wait_for_srq(timeout=None)
+        # except KeyboardInterrupt:
+        #     print("interrupted")
+        # return
 
     def trace_data(self) -> str:
         # TRACE:DATA?: reads all readings in the buffer
@@ -93,18 +95,19 @@ if __name__ == "__main__":
 
     print(keithley.get_idn())
 
-    print(keithley.internal_test())
+    # print(keithley.internal_test())
 
     keithley.conf_stat_model()
 
-    print(keithley.close_channel(0))
+    print(keithley.close_channel(1))
 
     keithley.set_func_and_range("CURR", 1e-6)
     # minimum step size is 5 mV
-    keithley.conf_staircase_sweep(0, -0.5, 0.005, 1)
+    keithley.conf_staircase_sweep(0.1, -0.1, -0.05, 1)
 
     keithley.run_staircase_sweep()
-
+    # TODO: SRQ
+    time.sleep(10)
     print(keithley.trace_data())
 
     # TODO: プロット機能の実装
