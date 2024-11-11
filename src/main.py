@@ -79,6 +79,14 @@ class Keithley6517B:
         #     print("interrupted")
         # return
 
+    def wait_for_srq(self):
+        try:
+            self.wait_for_srq()
+        except KeyboardInterrupt:
+            self.inst.write("TSEQ:ABOR")
+            print("Measument canceled.")
+        return
+
     def trace_data(self) -> str:
         # TRACE:DATA?: reads all readings in the buffer
         data = self.inst.query("TRACE:DATA?")
@@ -105,6 +113,8 @@ if __name__ == "__main__":
     keithley.conf_staircase_sweep(0.1, -0.1, -0.05, 1)
 
     keithley.run_staircase_sweep()
+
+    keithley.wait_for_srq()
     # TODO: SRQ
     time.sleep(10)
     print(keithley.trace_data())
