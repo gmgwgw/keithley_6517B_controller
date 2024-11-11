@@ -49,7 +49,9 @@ class Keithley6517B:
         """
 
         self.inst.write(":SENS:FUNC '{}'".format(func))
+        self.inst.write("SENS:CURR:NPLC 10")
         self.inst.write(":SENS:CURR:RANG:AUTO 1")
+        # NOTE: The current compliance is set to be 1 mA (cannot be changed by user)
         return
 
     def conf_staircase_sweep(
@@ -64,9 +66,6 @@ class Keithley6517B:
         # TSO: selects the control source that starts the test sequence
         # IMM: immediate control source
         self.inst.write(":TSEQ:TSO IMM")
-        # *OPC?: returns 1 after all pending operations are completed
-        # opc = self.inst.query("*OPC?")
-        # return opc
         return
 
     def run_staircase_sweep(self):
@@ -111,5 +110,3 @@ if __name__ == "__main__":
     print(keithley.trace_data())
 
     # TODO: プロット機能の実装
-    # TODO: エラー処理
-    # TODO: ログ出力
