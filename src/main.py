@@ -49,7 +49,7 @@ class Keithley6517B:
         """
 
         self.inst.write(":SENS:FUNC '{}'".format(func))
-        self.inst.write("SENS:CURR:NPLC 10")
+        self.inst.write("SENS:CURR:NPLC 1")
         self.inst.write(":SENS:CURR:RANG:AUTO 1")
         # NOTE: The current compliance is set to be 1 mA (cannot be changed by user)
         return
@@ -66,18 +66,26 @@ class Keithley6517B:
         # TSO: selects the control source that starts the test sequence
         # IMM: immediate control source
         self.inst.write(":TSEQ:TSO IMM")
+        opc = self.inst.query("*OPC?")
+        print("OPC", opc)
         return
 
     def run_staircase_sweep(self):
         # :TSEQ:ARM: arms the selected test sequence
         self.inst.write(":TSEQ:ARM")
-        time.sleep(1)
-        # self.inst.write("*TRG")
-        # try:
-        #     self.inst.wait_for_srq(timeout=None)
-        # except KeyboardInterrupt:
-        #     print("interrupted")
-        # return
+        return
+
+    def wait_for_srq(self):
+        while True:
+            try:
+                # self.inst.wait_for_srq()
+                print(type(self.inst))
+                print(self.inst.query("*STB?"))
+            except KeyboardInterrupt:
+                self.inst.write("TSEQ:ABOR")
+                print("Measument canceled.")
+                break
+        return
 
     def trace_data(self) -> str:
         # TRACE:DATA?: reads all readings in the buffer
@@ -98,15 +106,18 @@ if __name__ == "__main__":
 
     keithley.conf_stat_model()
 
-    print(keithley.close_channel(1))
+    print(keithley.close_channel(5))
 
     keithley.set_func_and_range("CURR", 1e-6)
     # minimum step size is 5 mV
-    keithley.conf_staircase_sweep(0.1, -0.1, -0.05, 1)
+    # keithley.conf_staircase_sweep(5, -5, -1, 1)
+    keithley.conf_staircase_sweep(0, -1.0, -0.05, 1)
 
     keithley.run_staircase_sweep()
+
+    # keithley.wait_for_srq()
     # TODO: SRQ
-    time.sleep(10)
+    time.sleep(30)
     print(keithley.trace_data())
 
     # TODO: プロット機能の実装

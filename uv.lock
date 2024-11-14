@@ -76,6 +76,7 @@ dependencies = [
     { name = "black" },
     { name = "gpib-ctypes" },
     { name = "psutil" },
+    { name = "pyvisa" },
     { name = "pyvisa-py" },
     { name = "zeroconf" },
 ]
@@ -85,6 +86,7 @@ requires-dist = [
     { name = "black", specifier = ">=24.10.0" },
     { name = "gpib-ctypes", specifier = ">=0.3.0" },
     { name = "psutil", specifier = ">=6.0.0" },
+    { name = "pyvisa", specifier = ">=1.14.1" },
     { name = "pyvisa-py", specifier = ">=0.7.2" },
     { name = "zeroconf", specifier = ">=0.135.0" },
 ]
