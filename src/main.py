@@ -29,6 +29,17 @@ if __name__ == "__main__":
     # keithley.wait_for_srq()
     # TODO: SRQ
     time.sleep(30)
-    print(keithley.trace_data())
 
-    # TODO: プロット機能の実装
+    res = keithley.trace_data()
+    print(res)
+    save_data(".res.txt", res)
+    parsed_data = parse_data(res)
+    xarray = np.arrange(0, -1.05, -0.05)
+    plot_data(
+        parsed_data=parsed_data,
+        xarray=xarray,
+        xlabel="Gate Voltage (V)",
+        ylabel="Source Current (mA)",
+        title="Test Nanotransistor",
+        out_path=".test_out.png",
+    )
