@@ -41,5 +41,5 @@ if __name__ == "__main__":
         xlabel="Gate Voltage (V)",
         ylabel="Source Current (mA)",
         title="Test Nanotransistor",
-        out_path=".test_out.png",
+        out_path="./test_out.png",
     )
