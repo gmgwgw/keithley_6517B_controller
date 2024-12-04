@@ -1,12 +1,23 @@
 import pyvisa
 import time
 from datetime import datetime, timedelta, timezone
+import sys
 
 from keithley_electrometer import *
 from plotter import *
 
 
 if __name__ == "__main__":
+    args = sys.argv
+    rev = bool(args[0])
+    if rev:
+        sta = float(args[2])
+        end = float(args[1])
+        ste = - float(args[3])
+    else:
+        sta = float(args[1])
+        en = float(args[2])
+        ste = float(args[3])
     JST = timezone(timedelta(hours=+9), 'JST')
 
     # GOOD, タイムゾーンを指定している．早い
@@ -28,6 +39,6 @@ if __name__ == "__main__":
 
     keithley.set_func_and_range()
     # minimum step size is 5 mV
-    keithley.conf_staircase_sweep(1.5, -1.5, -0.1, 1)
+    keithley.conf_staircase_sweep(sta, end, ste, 1)
 
     keithley.run_staircase_sweep()
