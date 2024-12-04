@@ -5,7 +5,9 @@ if __name__ == "__main__":
     JST = timezone(timedelta(hours=+9), 'JST')
 
     # GOOD, タイムゾーンを指定している．早い
-    timenow = str(datetime.now(JST))
+    timenow = datetime.now(JST)
+    d = timenow.strftime('%Y%m%d_%H_%M')
+    print(d)
     with open(".res.txt") as f:
         res = f.read()
         parsed_data = parse_data(res, 0, True)
@@ -18,5 +20,5 @@ if __name__ == "__main__":
             ylim=10e-8,
             title="Test Nanotransistor",
             # TODO: file name
-            out_path="./sikaku_B16_w_Vds-4.png",
+            out_path="./sikaku_B16_w_Vds-4"+d+".png",
         )
