@@ -8,20 +8,38 @@ def save_data(data_path: str, data: str):
     return
 
 
-# TODO: 単位を引数で指定
-def parse_data(data: str) -> list:
+# TODO: 単位を引数で指定 kata
+def parse_data(data: str, mul: int, is_abs: bool):
     l = list(data.split(","))
-    f = [float(x[:-4]) * 1000 for x in l[::3]]
-    return f
+    f = [float(x[:-4]) * (1000**mul) for x in l[::3]]
+    fnp = np.array(f)
+    print("raw")
+    for x in fnp:
+        print(x)
+    print()
+    if is_abs:
+        fnp = np.abs(fnp)
+        print("abs")
+        for x in fnp:
+            print(x)
+
+    return fnp
 
 
 def plot_data(
-    parsed_data: list, xarray: list, xlabel: str, ylabel: str, title: str, out_path: str
+    parsed_data: list,
+    xarray: list,
+    xlabel: str,
+    ylabel: str,
+    ylim: float,
+    title: str,
+    out_path: str,
 ):
-    plt.scatter(xarray, parsed_data)
+    plt.plot(xarray, parsed_data)
     plt.title(title)
     plt.xlabel(xlabel)
-    plt.ylim([0, 2.5])
+    plt.ylim([1e-12, ylim])
+    plt.yscale('log')
     plt.ylabel(ylabel)
     # plt.show()
     plt.savefig(out_path)
