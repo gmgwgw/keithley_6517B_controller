@@ -1,15 +1,15 @@
 import pyvisa
 from datetime import datetime, timedelta, timezone
 
-from keithley_electrometer import *
-from plotter import *
+from modules.keithley_electrometer import *
+from modules.plotter import *
 
 
 if __name__ == "__main__":
-    JST = timezone(timedelta(hours=+9), 'JST')
+    JST = timezone(timedelta(hours=+9), "JST")
+    timenow = datetime.now(JST)
+    nowstr = timenow.strftime("%Y%m%d_%H_%M_%S")
 
-    # GOOD, タイムゾーンを指定している．早い
-    timenow = str(datetime.now(JST))
     print("a")
     rm = pyvisa.ResourceManager()
     print("b")
@@ -25,4 +25,6 @@ if __name__ == "__main__":
     res = keithley.trace_data()
     print(res)
     # todo: file name
-    save_data(".res.txt", res)
+    with open("./conditions.txt") as f:
+        condstr = f.read()
+        save_data("./results/" + condstr + nowstr + ".txt", res)

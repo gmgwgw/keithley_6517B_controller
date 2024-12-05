@@ -7,11 +7,9 @@ def save_data(data_path: str, data: str):
         f.write(data)
     return
 
-
-# TODO: 単位を引数で指定 kata
-def parse_data(data: str, mul: int, is_abs: bool):
+def parse_data(data: str, is_abs: bool):
     l = list(data.split(","))
-    f = [float(x[:-4]) * (1000**mul) for x in l[::3]]
+    f = [float(x[:-4]) for x in l[::3]]
     fnp = np.array(f)
     print("raw")
     for x in fnp:
@@ -39,7 +37,7 @@ def plot_data(
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylim([1e-12, ylim])
-    plt.yscale('log')
+    plt.yscale("log")
     plt.ylabel(ylabel)
     # plt.show()
     plt.savefig(out_path)

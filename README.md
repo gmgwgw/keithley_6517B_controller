@@ -4,6 +4,7 @@ This is a script to perform stair case sweep measurement using Keithley 6517B an
 ### How to use
 You can run this script by using the following command.
 
-uv run python main.py
+example:
+    uv run python run.py False 0.5 -1.0 0.1
 
 ### References

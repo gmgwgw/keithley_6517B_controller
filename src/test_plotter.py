@@ -1,6 +1,5 @@
-import pytest
 import math
-from plotter import *
+from modules.plotter import *
 
 
 def test_save_data():
