@@ -40,7 +40,7 @@ class Keithley6517B:
         cros = self.inst.query("ROUT:CLOS:STAT?")
         return cros
 
-    def set_func_and_range(self):
+    def set_func_and_range(self, nplc):
         """set measuring mode and range
 
         Args:
@@ -49,7 +49,7 @@ class Keithley6517B:
         """
 
         self.inst.write(":SENS:FUNC 'CURR'")
-        self.inst.write("SENS:CURR:NPLC 1")
+        self.inst.write("SENS:CURR:NPLC {}".format(nplc))
         self.inst.write(":SENS:CURR:RANG:AUTO 1")
 
         return

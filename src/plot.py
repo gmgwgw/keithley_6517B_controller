@@ -27,17 +27,22 @@ if __name__ == "__main__":
 
     with open(newest_file_path) as f:
         res = f.read()
+        xarray = np.arange(sta, end + ste, ste)
+        with open("./parsed_results/" + newest_file_path.name, "w+") as f2:
+            parsed_data2 = parse_data(res, False)
+            f2.write(str(parsed_data2))
+            f2.write(str(xarray))
         parsed_data = parse_data(res, True)
         print(rang.split(","))
-        xarray = np.arange(sta, end + ste, ste)
 
         plot_data(
             parsed_data=parsed_data,
-            xarray=xarray[: len(parsed_data)],
+            xarray=xarray,
             xlabel="Gate Voltage (V)",
             ylabel="Source Current (nA)",
             ylim=10e-8,
+            # TODO: title or legend
             title="Test Nanotransistor",
             # TODO: file name
-            out_path="./figures/" + condstr + nowstr + ".png",
+            out_path="./figures/" + newest_file_path.stem + ".png",
         )

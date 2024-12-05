@@ -13,10 +13,8 @@ if __name__ == "__main__":
     print("a")
     rm = pyvisa.ResourceManager()
     print("b")
-    visa_tuple = rm.list_resources()
-    print("c")
-    # 遅い
-    inst = rm.open_resource(visa_tuple[0])
+    # 遅い 
+    inst = rm.open_resource("GPIB0::27::INSTR")
     print("d")
     keithley = Keithley6517B(inst)
 
