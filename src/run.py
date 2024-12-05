@@ -17,6 +17,8 @@ if __name__ == "__main__":
         sta = float(args[1])
         en = float(args[2])
         ste = float(args[3])
+    with open("./tmp.txt") as f:
+        f.write("{},{},{}".format([sta, end, ste]))
 
     rm = pyvisa.ResourceManager()
     visa_tuple = rm.list_resources()

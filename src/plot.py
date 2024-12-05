@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # GOOD, タイムゾーンを指定している．早い
     timenow = datetime.now(JST)
     nowstr = timenow.strftime("%Y%m%d_%H_%M_%S")
-    p = Path(".")
+    p = Path("./results")
     files = list(p.glob("*"))
     file_updates = {file_path: os.stat(file_path).st_mtime for file_path in files}
 
@@ -20,10 +20,14 @@ if __name__ == "__main__":
     with open("./conditions.txt") as f:
         condstr = f.read()
 
-    with open("./result_txt/.txt") as f:
+    with open("./tmp.txt") as f:
+        rang = f.read()
+        sta, end, ste = rang.split()
+
+    with open(newest_file_path) as f:
         res = f.read()
         parsed_data = parse_data(res, 0, True)
-        xarray = np.arange(1.5, -1.55, -0.1)
+        xarray = np.arange(sta, end + ste, ste)
 
         plot_data(
             parsed_data=parsed_data,
@@ -33,5 +37,5 @@ if __name__ == "__main__":
             ylim=10e-8,
             title="Test Nanotransistor",
             # TODO: file name
-            out_path="./figures/"+ condstr + nowstr + ".png",
+            out_path="./figures/" + condstr + nowstr + ".png",
         )

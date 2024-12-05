@@ -7,6 +7,7 @@ def save_data(data_path: str, data: str):
         f.write(data)
     return
 
+
 def parse_data(data: str, is_abs: bool):
     l = list(data.split(","))
     f = [float(x[:-4]) for x in l[::3]]
