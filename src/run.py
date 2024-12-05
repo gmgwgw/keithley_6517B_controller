@@ -8,17 +8,18 @@ from modules.plotter import *
 if __name__ == "__main__":
     # TODO: 動作確認
     args = sys.argv
-    rev = bool(args[0])
+    print(args)
+    rev = bool(args[1])
     if rev:
-        sta = float(args[2])
-        end = float(args[1])
-        ste = -float(args[3])
+        sta = float(args[3])
+        end = float(args[2])
+        ste = -float(args[4])
     else:
-        sta = float(args[1])
-        en = float(args[2])
-        ste = float(args[3])
-    with open("./tmp.txt") as f:
-        f.write("{},{},{}".format([sta, end, ste]))
+        sta = float(args[2])
+        en = float(args[3])
+        ste = float(args[4])
+    with open("./tmp.txt", 'w') as f:
+        f.write("{},{},{}".format(sta, end, ste))
 
     rm = pyvisa.ResourceManager()
     visa_tuple = rm.list_resources()

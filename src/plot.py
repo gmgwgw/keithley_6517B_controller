@@ -22,11 +22,13 @@ if __name__ == "__main__":
 
     with open("./tmp.txt") as f:
         rang = f.read()
-        sta, end, ste = rang.split()
+        print(rang)
+        sta, end, ste = map(float, rang.split(","))
 
     with open(newest_file_path) as f:
         res = f.read()
-        parsed_data = parse_data(res, 0, True)
+        parsed_data = parse_data(res, True)
+        print(rang.split(","))
         xarray = np.arange(sta, end + ste, ste)
 
         plot_data(
