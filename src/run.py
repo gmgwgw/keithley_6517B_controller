@@ -31,6 +31,7 @@ if __name__ == "__main__":
 
     # print(keithley.internal_test())
 
+    print(keithley.close_channel(5))
     keithley.conf_stat_model()
 
     print("Set NPLC: {}".format(nplc))

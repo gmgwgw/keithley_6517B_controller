@@ -1,1 +1,1 @@
-sikaku_A16_Vds-01V__1nplc_010step_
+test_resist_gate-source_nplc10

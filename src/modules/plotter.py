@@ -30,14 +30,14 @@ def plot_data(
     xarray: list,
     xlabel: str,
     ylabel: str,
-    ylim: float,
+    ylim: list,
     title: str,
     out_path: str,
 ):
     plt.plot(xarray, parsed_data)
     plt.title(title)
     plt.xlabel(xlabel)
-    plt.ylim([1e-12, ylim])
+    plt.ylim(ylim)
     plt.yscale("log")
     plt.ylabel(ylabel)
     # plt.show()
