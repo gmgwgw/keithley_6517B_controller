@@ -39,9 +39,9 @@ if __name__ == "__main__":
                 xarray=xarray,
                 xlabel="Gate Voltage (V)",
                 ylabel="Source Current (nA)",
-                ylim=10e-8,
+                ylim=[1e-15, 1e-7],
                 # TODO: title or legend
                 title="Test Nanotransistor",
                 # TODO: file name
-                out_path="./figures/" + file_path.stem + ".png",
+                out_path="./figures/" + file_path.stem + "mul" + ".png",
             )
