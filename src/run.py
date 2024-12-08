@@ -39,6 +39,6 @@ if __name__ == "__main__":
 
     # minimum step size is 5 mV
     print("Start staircase sweep measurement from {}V to {}V".format(sta, end))
-    keithley.conf_staircase_sweep(sta, end, ste, 1)
+    # keithley.conf_staircase_sweep(sta, end, ste, 1)
 
     keithley.run_staircase_sweep()

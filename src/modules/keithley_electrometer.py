@@ -1,4 +1,6 @@
 import pyvisa
+import time
+import numpy as np
 
 
 class Keithley6517B:
@@ -75,17 +77,26 @@ class Keithley6517B:
         self.inst.write(":TSEQ:ARM")
         return
 
-    def wait_for_srq(self):
-        while True:
-            try:
-                # self.inst.wait_for_srq()
-                print(type(self.inst))
-                print(self.inst.query("*STB?"))
-            except KeyboardInterrupt:
-                self.inst.write("TSEQ:ABOR")
-                print("Measument canceled.")
-                break
-        return
+    def run_bi_staircase_sweep(
+        self, start: float, end: float, step: int, delay: float
+    ):
+        voltages_forward = np.arange(start, stop, step)
+        voltages_backward = np.arange(stop, start, -step)
+        voltages = np.concatenate(voltages_forward, voltages_backward)
+        meas_results = []
+
+        self.inst.write("*CLS")
+        for v in voltages:
+            # apply voltage
+            self.inst.write()
+            time.sleep(delay)
+            # measure current
+            res = self.inst.write(":MEAS:CURR:DC?")
+            print(res)
+            # meas_results.append(res)
+            time.sleep(0.1)
+        # with open(out_path, 'w') as f:
+        #     f.write(meas_results)
 
     def trace_data(self) -> str:
         # TRACE:DATA?: reads all readings in the buffer
