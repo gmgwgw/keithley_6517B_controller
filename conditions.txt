@@ -1,1 +1,1 @@
-test_resist_gate-source_nplc10
+sankaku_G7_10nplc_fetonly_
