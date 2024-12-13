@@ -28,6 +28,9 @@ if __name__ == "__main__":
     with open(newest_file_path) as f:
         res = f.read()
         xarray = np.arange(sta, end+ste, ste)
+        with open("./conditions.txt") as f:
+            condstr = f.read()
+
         with open("./parsed_results/" + newest_file_path.name, "w+") as f2:
             parsed_data2 = parse_data(res, False)
             f2.write(str(parsed_data2))
@@ -42,9 +45,9 @@ if __name__ == "__main__":
             xarray=xarray,
             xlabel="Gate Voltage (V)",
             ylabel="Source Current (A)",
-            ylim=[1e-10, 1e-3],
+            ylim=[1e-12, 1e-3],
             # TODO: title or legend
-            title="Test Nanotransistor",
+            title=condstr,
             # TODO: file name
             out_path="./figures/" + newest_file_path.stem + ".png",
         )
