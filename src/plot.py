@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     with open(newest_file_path) as f:
         res = f.read()
-        xarray = np.arange(sta, end+ste, ste)
+        xarray = np.arange(sta, end + ste, ste)
         with open("./conditions.txt") as f:
             condstr = f.read()
 

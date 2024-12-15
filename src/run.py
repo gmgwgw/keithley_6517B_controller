@@ -11,7 +11,7 @@ if __name__ == "__main__":
     print("Input: ", args)
     sta = float(args[1])
     end = float(args[2])
-    if sta>end:
+    if sta > end:
         ste = -float(args[3])
     else:
         ste = float(args[3])

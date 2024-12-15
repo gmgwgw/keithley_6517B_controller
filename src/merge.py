@@ -45,3 +45,6 @@ if __name__ == "__main__":
                 # TODO: file name
                 out_path="./figures/" + file_path.stem + "mul" + ".png",
             )
+
+
+# TODO: plot.pyに統合

@@ -77,9 +77,7 @@ class Keithley6517B:
         self.inst.write(":TSEQ:ARM")
         return
 
-    def run_bi_staircase_sweep(
-        self, start: float, end: float, step: int, delay: float
-    ):
+    def run_bi_staircase_sweep(self, start: float, end: float, step: int, delay: float):
         voltages_forward = np.arange(start, end, step)
         voltages_backward = np.arange(end, start, -step)
         voltages = np.concatenate(voltages_forward, voltages_backward)
