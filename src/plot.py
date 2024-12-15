@@ -45,7 +45,7 @@ if __name__ == "__main__":
             xarray=xarray,
             xlabel="Gate Voltage (V)",
             ylabel="Source Current (A)",
-            ylim=[1e-12, 1e-3],
+            ylim=[1e-12, 1e-4],
             # TODO: title or legend
             title=condstr,
             # TODO: file name
