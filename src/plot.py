@@ -37,7 +37,7 @@ if __name__ == "__main__":
             f2.write(str(xarray))
         parsed_data = parse_data(res, True)
         print(rang.split(","))
-        print(xarray, parsed_data)
+        print(newest_file_path.name)
         plot_data(
             parsed_data=parsed_data,
             # todo hen

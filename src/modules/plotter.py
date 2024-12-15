@@ -32,7 +32,6 @@ def plot_data(
     ylabel: str,
     ylim: list,
     title: str,
-    out_path: str,
 ):
     plt.plot(xarray, parsed_data)
     plt.title(title)
@@ -41,5 +40,8 @@ def plot_data(
     plt.yscale("log")
     plt.ylabel(ylabel)
     # plt.show()
-    plt.savefig(out_path)
+    
     return
+
+def save_fig(out_path: str):
+    plt.savefig(out_path)

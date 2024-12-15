@@ -11,7 +11,8 @@ if __name__ == "__main__":
     timenow = datetime.now(JST)
     nowstr = timenow.strftime("%Y%m%d_%H_%M_%S")
     p = Path("./results")
-    files = list(p.glob("*"))
+    # TODO:より良い指定方法
+    files = list(p.glob("s_A13_eg_bare3_*"))
     file_updates = {file_path: os.stat(file_path).st_mtime for file_path in files}
     path_list = sorted(file_updates, key=file_updates.get)
 
@@ -23,7 +24,7 @@ if __name__ == "__main__":
         print(rang)
         sta, end, ste = map(float, rang.split(","))
 
-    for file_path in path_list[:3]:
+    for file_path in path_list:
         with open(file_path) as f:
             res = f.read()
             xarray = np.arange(sta, end + ste, ste)
@@ -39,12 +40,9 @@ if __name__ == "__main__":
                 xarray=xarray,
                 xlabel="Gate Voltage (V)",
                 ylabel="Source Current (nA)",
-                ylim=[1e-15, 1e-7],
-                # TODO: title or legend
+                ylim=[1e-13, 1e-4],
+                # TODO: legend
                 title="Test Nanotransistor",
                 # TODO: file name
-                out_path="./figures/" + file_path.stem + "mul" + ".png",
             )
-
-
-# TODO: plot.pyに統合
+    save_fig(out_path="./figures/" + file_path.stem + "mulmul" + ".png",)
