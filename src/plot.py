@@ -5,11 +5,11 @@ from datetime import datetime, timedelta, timezone
 from modules.plotter import *
 
 if __name__ == "__main__":
+    # get the time for time stamp
     JST = timezone(timedelta(hours=+9), "JST")
-
-    # GOOD, タイムゾーンを指定している．早い
     timenow = datetime.now(JST)
     nowstr = timenow.strftime("%Y%m%d_%H_%M_%S")
+
     p = Path("./results")
     files = list(p.glob("*"))
     file_updates = {file_path: os.stat(file_path).st_mtime for file_path in files}

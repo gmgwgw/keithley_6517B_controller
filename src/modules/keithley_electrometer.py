@@ -57,7 +57,7 @@ class Keithley6517B:
         return
 
     def conf_staircase_sweep(
-        self, star: float, stop: float, step: float, stim: float
+        self, star: float, stop: float, step: float, stim: float = 1
     ) -> str:
         self.inst.write(":TSEQ:TYPE STSW")
         self.inst.write(":TSEQ:STSW:STAR {}".format(star))

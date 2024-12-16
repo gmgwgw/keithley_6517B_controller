@@ -40,8 +40,9 @@ def plot_data(
     plt.yscale("log")
     plt.ylabel(ylabel)
     # plt.show()
-    
+
     return
+
 
 def save_fig(out_path: str):
     plt.savefig(out_path)

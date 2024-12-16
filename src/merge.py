@@ -45,4 +45,6 @@ if __name__ == "__main__":
                 title="Test Nanotransistor",
                 # TODO: file name
             )
-    save_fig(out_path="./figures/" + file_path.stem + "mulmul" + ".png",)
+    save_fig(
+        out_path="./figures/" + file_path.stem + "mulmul" + ".png",
+    )
