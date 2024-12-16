@@ -3,7 +3,7 @@ from modules.plotter import *
 
 
 def test_save_data():
-    test_data_path = "./test.txt"
+    test_data_path = "../testfiles.test.txt"
     test_data = "ABCDE"
     save_data(test_data_path, test_data)
     with open(test_data_path) as f:

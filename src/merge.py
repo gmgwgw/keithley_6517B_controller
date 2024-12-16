@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 from datetime import datetime, timedelta, timezone
 
-from modules.plotter import *
+from modules.plot import *
 
 if __name__ == "__main__":
     JST = timezone(timedelta(hours=+9), "JST")
@@ -11,6 +11,7 @@ if __name__ == "__main__":
     timenow = datetime.now(JST)
     nowstr = timenow.strftime("%Y%m%d_%H_%M_%S")
     p = Path("./results")
+
     # TODO:より良い指定方法
     files = list(p.glob("s_A13_eg_bare3_*"))
     file_updates = {file_path: os.stat(file_path).st_mtime for file_path in files}
