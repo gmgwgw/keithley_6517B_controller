@@ -1,21 +1,28 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+from modules.datamodel import TransistorData
 
-def plot_data(
-    parsed_data: list,
-    xarray: list,
+
+def plot_data_list(
+    data_list: list[TransistorData],
     xlabel: str,
     ylabel: str,
     ylim: list,
     title: str,
+    xline: float, 
 ):
-    plt.plot(xarray, parsed_data)
+    for transistor_data in data_list:
+        v_array = transistor_data.v_array()
+        label = transistor_data.meas_label
+        plt.plot(v_array, abs(transistor_data.c_data), label=label)
+    plt.yscale("log")
     plt.title(title)
     plt.xlabel(xlabel)
-    plt.ylim(ylim)
-    plt.yscale("log")
     plt.ylabel(ylabel)
+    plt.ylim(ylim)
+    plt.vlines(xline, ylim[0], ylim[1], color='gray', linestyles='dotted')
+    plt.legend()
     return
 
 

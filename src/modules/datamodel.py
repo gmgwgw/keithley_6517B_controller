@@ -63,4 +63,11 @@ class TransistorData:
             return
 
     def v_array(self) -> np.ndarray:
-        return np.arange(self.v_start, self.v_end, self.v_step)
+        # +self.v_stepの有無
+        return np.arange(self.v_start, self.v_end + self.v_step, self.v_step)
+
+    def curr_at(self, gate_voltage: float, num_average: int) -> float:
+        distances = np.abs(self.v_array() - gate_voltage)
+        index = np.argmin(distances)
+        # print("v_array", self.v_array()[index])
+        return np.mean(self.c_data[index - num_average//2: index + num_average//2])
