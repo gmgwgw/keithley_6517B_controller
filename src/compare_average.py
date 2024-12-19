@@ -38,4 +38,4 @@ plot_data_list(
     xline=-0.5
 )
 
-save_fig("./20er24gege1215.png")
+save_fig("./20241215.png")
