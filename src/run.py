@@ -19,7 +19,7 @@ if __name__ == "__main__":
     else:
         v_step = float(args[3])
 
-    # save stsw settings to tmp.txt
+    # save stairsweep settings to tmp.txt
     with open("./tmp/tmp.txt", "w") as f:
         f.write("{},{},{}".format(v_start, v_end, v_step))
 
