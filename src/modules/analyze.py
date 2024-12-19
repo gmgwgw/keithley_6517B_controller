@@ -3,10 +3,6 @@ import numpy as np
 from modules.datamodel import TransistorData
 
 
-def calc_threshold_voltage(data: TransistorData) -> float:
-    return
-
-
 def calc_sensitivity(data: TransistorData, vrange: list) -> float:
     return
 

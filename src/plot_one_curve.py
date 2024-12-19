@@ -1,8 +1,6 @@
-import os
-import numpy as np
 from pathlib import Path
 
-from modules.preprocess import *
+from keithley_6517B_controller.src.modules.process import *
 from modules.datamodel import *
 from modules.plot import *
 

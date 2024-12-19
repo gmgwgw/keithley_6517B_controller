@@ -2,6 +2,7 @@ import pyvisa
 from datetime import datetime, timedelta, timezone
 
 from modules.keithley import *
+from modules.process import *
 
 GPIB_ADDR = "GPIB0::27::INSTR"
 
@@ -14,11 +15,12 @@ if __name__ == "__main__":
     inst = rm.open_resource(GPIB_ADDR)
     keithley = Keithley6517B(inst)
 
-    print(keithley.get_idn())
+    print("IDN: ", keithley.get_idn())
 
     res = keithley.trace_data()
+    print("*** measurement result ***")
     print(res)
 
     with open("./tmp/conditions.txt") as f:
         condstr = f.read()
-        save_data("./results/" + condstr + nowstr + ".txt", res)
+        save_data("./data/results/" + condstr + nowstr + ".txt", res)

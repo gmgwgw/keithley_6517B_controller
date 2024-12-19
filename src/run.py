@@ -1,11 +1,11 @@
 import pyvisa
 import sys
 
-from modules.keithley_electrometer import *
-from modules.plotter import *
+from modules.keithley import *
+from modules.plot import *
 
 # number of power line cycles
-# If you want to measure current more slowly, please change the value to 10.
+# If you want to measure current slowly, please change the value to 10.
 NPLC = 1
 
 if __name__ == "__main__":
@@ -13,7 +13,7 @@ if __name__ == "__main__":
     print("Command Line Argments: ", args)
     v_start = float(args[1])
     v_end = float(args[2])
-    # Step size must be negative if (start) > (end).
+    # Step size must be negative if v_start > v_end.
     if v_start > v_end:
         v_step = -float(args[3])
     else:
@@ -36,6 +36,6 @@ if __name__ == "__main__":
 
     # NOTE: Minimum step size is 5 mV.
     print("Start staircase sweep measurement from {}V to {}V.".format(v_start, v_end))
-    print("Step size is set to be {}V.".format(stv_stepe))
+    print("Step size is set to be {}V.".format(v_step))
     keithley.conf_staircase_sweep(v_start, v_end, v_step)
     keithley.run_staircase_sweep()

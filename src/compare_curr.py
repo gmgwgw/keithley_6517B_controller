@@ -1,8 +1,6 @@
-import os
-import numpy as np
 from pathlib import Path
 
-from modules.preprocess import *
+from modules.process import *
 from modules.datamodel import *
 from modules.analyze import *
 from modules.plot import *

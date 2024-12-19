@@ -1,53 +1,31 @@
-from pathlib import Path
 import os
-from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
+from keithley_6517B_controller.src.modules.process import *
+from modules.datamodel import *
 from modules.plot import *
 
-if __name__ == "__main__":
-    # get the time for time stamp
-    JST = timezone(timedelta(hours=+9), "JST")
-    timenow = datetime.now(JST)
-    nowstr = timenow.strftime("%Y%m%d_%H_%M_%S")
+dir_path = Path("./data/results")
+file_path_list = list(dir_path.glob("*"))
 
-    p = Path("./data/results")
-    files = list(p.glob("*"))
-    file_updates = {file_path: os.stat(file_path).st_mtime for file_path in files}
+print("Checking ", file_path_list)
 
-    newest_file_path = max(file_updates, key=file_updates.get)
-    print(newest_file_path)
+file_updates = {file_path: os.stat(file_path).st_mtime for file_path in file_path_list}
+file_path = sorted(file_updates, key=file_updates.get)[0]
 
-    with open("./conditions.txt") as f:
-        condstr = f.read()
+with open(file_path, "r") as f:
+    raw_data = f.read()
+c_data = extract_curr_list(raw_data)
+data = TransistorData(ChipName.SQUARE, "A13", "for check", -0.2, -1.0, -0.005, c_data)
+print(data.info())
 
-    with open("./tmp.txt") as f:
-        rang = f.read()
-        print(rang)
-        sta, end, ste = map(float, rang.split(","))
 
-    with open(newest_file_path) as f:
-        res = f.read()
-        xarray = np.arange(sta, end + ste, ste)
-        with open("./conditions.txt") as f:
-            condstr = f.read()
+plot_data_list(
+    [data],
+    xlabel="Gate Voltage (V)",
+    ylabel="Source Current (A)",
+    ylim=[1e-12, 1e-4],
+    title="just checking",
+)
 
-        with open("./parsed_results/" + newest_file_path.name, "w+") as f2:
-            parsed_data2 = parse_data(res, False)
-            f2.write(str(parsed_data2))
-            f2.write(str(xarray))
-        parsed_data = parse_data(res, True)
-        print(rang.split(","))
-        print(newest_file_path.name)
-        plot_data(
-            parsed_data=parsed_data,
-            # todo hen
-            # xarray=xarray[:-1],
-            xarray=xarray,
-            xlabel="Gate Voltage (V)",
-            ylabel="Source Current (A)",
-            ylim=[1e-12, 1e-4],
-            # TODO: title or legend
-            title=condstr,
-            # TODO: file name
-            out_path="./figures/" + newest_file_path.stem + ".png",
-        )
+save_fig("./figures")

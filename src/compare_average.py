@@ -1,14 +1,9 @@
-import os
-import numpy as np
 from pathlib import Path
 
-from modules.preprocess import *
+from keithley_6517B_controller.src.modules.process import *
 from modules.datamodel import *
 from modules.analyze import *
 from modules.plot import *
-
-
-
 
 
 # transistor only
@@ -39,7 +34,7 @@ plot_data_list(
     xlabel="Gate Voltage (V)",
     ylabel="Source Current (A)",
     ylim=[1e-12, 1e-4],
-    title="Extended gate test (geometric mean)",
+    title="Extended gate test",
     xline=-0.5
 )
 
