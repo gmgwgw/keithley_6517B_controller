@@ -10,7 +10,7 @@ def plot_data_list(
     ylabel: str,
     ylim: list,
     title: str,
-    xline: float, 
+    xline: float,
 ):
     for transistor_data in data_list:
         v_array = transistor_data.v_array()
@@ -21,7 +21,7 @@ def plot_data_list(
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.ylim(ylim)
-    plt.vlines(xline, ylim[0], ylim[1], color='gray', linestyles='dotted')
+    plt.vlines(xline, ylim[0], ylim[1], color="gray", linestyles="dotted")
     plt.legend()
     return
 

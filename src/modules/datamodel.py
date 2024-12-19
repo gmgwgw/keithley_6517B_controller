@@ -43,4 +43,4 @@ class TransistorData:
     def curr_at(self, gate_voltage: float, num_average: int) -> float:
         distances = np.abs(self.v_array() - gate_voltage)
         index = np.argmin(distances)
-        return np.mean(self.c_data[index - num_average//2: index + num_average//2])
+        return np.mean(self.c_data[index - num_average // 2 : index + num_average // 2])

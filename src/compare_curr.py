@@ -33,12 +33,7 @@ data_list_for_comparison = [
     data_average_10,
 ]
 
-sds = [
-    sd_f,
-    sd_b,
-    sd_0,
-    sd_10
-]
+sds = [sd_f, sd_b, sd_0, sd_10]
 
 for i in range(4):
     print("SD ", data_list_for_comparison[i].meas_label, sds[i])

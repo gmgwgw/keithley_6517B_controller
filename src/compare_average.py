@@ -35,7 +35,7 @@ plot_data_list(
     ylabel="Source Current (A)",
     ylim=[1e-12, 1e-4],
     title="Extended gate test",
-    xline=-0.5
+    xline=-0.5,
 )
 
 save_fig("./20241215.png")

@@ -4,6 +4,7 @@ import numpy as np
 from modules.datamodel import *
 from modules.analyze import *
 
+
 def save_data(data_txt_path: Path, raw_data: str):
     """save raw data to txt file
 
@@ -31,7 +32,9 @@ def extract_curr_list(raw_data: str) -> np.ndarray:
     return fnp
 
 
-def calc_average(data_list: list[TransistorData], meas_label: str = "") -> TransistorData:
+def calc_average(
+    data_list: list[TransistorData], meas_label: str = ""
+) -> TransistorData:
     chip_name = data_list[0].chip_name
     transistor_name = data_list[0].transistor_name
     v_start = data_list[0].v_start
@@ -52,7 +55,9 @@ def calc_geometric_average(
     v_start = data_list[0].v_start
     v_end = data_list[0].v_end
     v_step = data_list[0].v_step
-    c_data_log_average = sum(np.log10(abs([d.c_data for d in data_list]))) / len(data_list)
+    c_data_log_average = sum(np.log10(abs([d.c_data for d in data_list]))) / len(
+        data_list
+    )
 
     res = TransistorData(
         chip_name,
@@ -67,7 +72,7 @@ def calc_geometric_average(
     return res
 
 
-def read_txt_from_folder(dir_path: Path, meas_label: str="") -> list[TransistorData]:
+def read_txt_from_folder(dir_path: Path, meas_label: str = "") -> list[TransistorData]:
     file_path_list = list(dir_path.glob("*"))
     data_list = []
     for file_path in file_path_list:
@@ -82,7 +87,9 @@ def read_txt_from_folder(dir_path: Path, meas_label: str="") -> list[TransistorD
     return data_list
 
 
-def calc_mean_in_folder(dir_path: Path, meas_label: str, log: bool=False) -> TransistorData:
+def calc_mean_in_folder(
+    dir_path: Path, meas_label: str, log: bool = False
+) -> TransistorData:
     data_list = read_txt_from_folder(dir_path, meas_label)
     if log:
         data_average = calc_geometric_average(data_list, meas_label)
