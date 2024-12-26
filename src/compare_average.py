@@ -33,7 +33,7 @@ plot_data_list(
     data_list_for_comparison,
     xlabel="Gate Voltage (V)",
     ylabel="Source Current (A)",
-    ylim=[1e-12, 1e-4],
+    ylim=[1e-10, 1e-4],
     title="Extended gate test",
     xline=-0.5,
 )
