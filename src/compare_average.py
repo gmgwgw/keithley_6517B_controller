@@ -22,8 +22,8 @@ from modules.plot import *
 # dir_path_10 = Path("./data/ninta10ug")
 # data_average_10 = calc_mean_in_folder(dir_path_10, "Ni(Ⅱ)-NTA with BSA (10μg/mL)")
 
-dir_path_ba = Path("./data/bare")
-data_average_ba = calc_mean_in_folder(dir_path_ba, "Au")
+# dir_path_ba = Path("./data/bare")
+# data_average_ba = calc_mean_in_folder(dir_path_ba, "Au")
 
 dir_path_be = Path("./data/before")
 data_average_be = calc_mean_in_folder(dir_path_be, "before hybridization")
@@ -36,7 +36,7 @@ data_list_for_comparison = [
     # data_average_b,
 #     data_average_0,
 #     data_average_10,
-    data_average_ba,
+    # data_average_ba,
     data_average_be,
     data_average_af
 ]
@@ -50,4 +50,4 @@ plot_data_list(
     xline=-0.5,
 )
 
-save_fig("./20241227.png")
+save_fig("./20241228.png")
