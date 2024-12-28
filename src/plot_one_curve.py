@@ -14,7 +14,7 @@ for i, file_path in enumerate(file_path_list):
         raw_data = f.read()
     c_data = extract_curr_list(raw_data)
     # TODO: chip name
-    data = TransistorData(ChipName.SQUARE, "A13", str(i + 1), -0.3, -1.0, -0.005, c_data)
+    data = TransistorData(ChipName.SQUARE, "A13", str(i + 1), -0.5, -1.0, -0.005, c_data)
     data_list.append(data)
     print(data.info())
 
@@ -28,4 +28,4 @@ plot_data_list(
     xline=-0.5
 )
 
-save_fig("./ninta10")
+save_fig("./test")
