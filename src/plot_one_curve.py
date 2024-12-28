@@ -24,8 +24,8 @@ plot_data_list(
     xlabel="Gate Voltage (V)",
     ylabel="Source Current (A)",
     ylim=[1e-10, 1e-6],
-    title="transfer curve of nanotransistor with BSA probe (10 μg/mL)",
+    title="transfer curve of DNA probe after hybridization",
     xline=-0.5
 )
 
-save_fig("./ninta10")
+save_fig("./befores_sample3")
