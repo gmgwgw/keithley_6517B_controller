@@ -81,7 +81,7 @@ def read_txt_from_folder(dir_path: Path, meas_label: str = "") -> list[Transisto
         c_data = extract_curr_list(raw_data)
         # TODO: chip name
         data = TransistorData(
-            ChipName.SQUARE, "A13", meas_label, -0.3, -1.0, -0.005, c_data
+            ChipName.SQUARE, "A13", meas_label, -0.4, -1.0, -0.005, c_data
         )
         data_list.append(data)
     return data_list
