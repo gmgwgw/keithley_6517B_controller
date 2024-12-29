@@ -13,7 +13,7 @@ for i, file_path in enumerate(file_path_list):
     with open(file_path, "r") as f:
         tmp_data = f.readline()
         raw_data = f.readline()
-    v_data = map(float, tmp_data.split(","))
+    v_data = list(map(float, tmp_data.split(",")))
     c_data = extract_curr_list(raw_data)
     # TODO: chip name
     data = TransistorData(ChipName.SQUARE, "A13", str(i + 1), v_data[0], v_data[1], v_data[2], c_data)
@@ -25,7 +25,7 @@ plot_data_list(
     data_list,
     xlabel="Gate Voltage (V)",
     ylabel="Source Current (A)",
-    ylim=[1e-10, 1e-6],
+    ylim=[1e-12, 1e-5],
     title="transfer curve of DNA probe after hybridization",
     xline=-0.5
 )
