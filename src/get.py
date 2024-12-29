@@ -21,6 +21,9 @@ if __name__ == "__main__":
     print("*** measurement result ***")
     print(res)
 
+    with open("./tmp/tmp.txt") as f:
+        tmpstr = f.read()
+
     with open("./tmp/conditions.txt") as f:
         condstr = f.read()
-        save_data("./data/results/" + condstr + nowstr + ".txt", res)
+        save_data("./data/results/" + condstr + nowstr + ".txt", tmpstr, res)

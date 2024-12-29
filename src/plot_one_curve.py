@@ -11,10 +11,12 @@ print(file_path_list)
 data_list = []
 for i, file_path in enumerate(file_path_list):
     with open(file_path, "r") as f:
-        raw_data = f.read()
+        tmp_data = f.readline()
+        raw_data = f.readline()
+    v_data = map(float, tmp_data.split(","))
     c_data = extract_curr_list(raw_data)
     # TODO: chip name
-    data = TransistorData(ChipName.SQUARE, "A13", str(i + 1), -0.5, -1.0, -0.005, c_data)
+    data = TransistorData(ChipName.SQUARE, "A13", str(i + 1), v_data[0], v_data[1], v_data[2], c_data)
     data_list.append(data)
     print(data.info())
 
@@ -28,8 +30,4 @@ plot_data_list(
     xline=-0.5
 )
 
-<<<<<<< HEAD
 save_fig("./test")
-=======
-save_fig("./befores_sample3")
->>>>>>> 9588386a120883203589a486d5623cef269729f6

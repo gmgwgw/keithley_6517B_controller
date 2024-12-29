@@ -5,15 +5,16 @@ from modules.datamodel import *
 from modules.analyze import *
 
 
-def save_data(data_txt_path: Path, raw_data: str):
+def save_data(data_txt_path: Path, tmp_str: str, raw_data: str):
     """save raw data to txt file
 
     Args:
         data_txt_path (Path): path to txt file
         raw_data (str): str of the data sent from the instrument
     """
+    data = "{}\n{}".format(tmp_str, raw_data)
     with open(data_txt_path, mode="w") as f:
-        f.write(raw_data)
+        f.write(data)
     return
 
 
@@ -77,12 +78,12 @@ def read_txt_from_folder(dir_path: Path, meas_label: str = "") -> list[Transisto
     data_list = []
     for file_path in file_path_list:
         with open(file_path, "r") as f:
-            raw_data = f.read()
+            tmp_data = f.readline()
+            raw_data = f.readline()
+        v_data = map(float, tmp_data.split(","))
         c_data = extract_curr_list(raw_data)
         # TODO: chip name
-        data = TransistorData(
-            ChipName.SQUARE, "A13", meas_label, -0.3, -1.0, -0.005, c_data
-        )
+        data = TransistorData(ChipName.SQUARE, "A13", str(i + 1), v_data[0], v_data[1], v_data[2], c_data)
         data_list.append(data)
     return data_list
 
