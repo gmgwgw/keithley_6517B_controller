@@ -5,7 +5,7 @@ from modules.datamodel import *
 from modules.plot import *
 
 dir_path = Path("./data/results")
-file_path_list = list(dir_path.glob("*"))
+file_path_list = list(dir_path.glob("*nta*ng*honban_*"))
 
 print(file_path_list)
 data_list = []
@@ -25,7 +25,7 @@ plot_data_list(
     data_list,
     xlabel="Gate Voltage (V)",
     ylabel="Source Current (A)",
-    ylim=[1e-12, 1e-5],
+    ylim=[1e-10, 1e-5],
     title="transfer curve of DNA probe after hybridization",
     xline=-0.5
 )

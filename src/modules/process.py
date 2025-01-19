@@ -76,17 +76,16 @@ def calc_geometric_average(
 def read_txt_from_folder(dir_path: Path, meas_label: str = "") -> list[TransistorData]:
     file_path_list = list(dir_path.glob("*"))
     data_list = []
-    for file_path in file_path_list:
+    for i, file_path in enumerate(file_path_list):
         with open(file_path, "r") as f:
             tmp_data = f.readline()
             raw_data = f.readline()
-        v_data = map(float, tmp_data.split(","))
+        v_data = list(map(float, tmp_data.split(",")))
         c_data = extract_curr_list(raw_data)
         # TODO: chip name
         data = TransistorData(ChipName.SQUARE, "A13", str(i + 1), v_data[0], v_data[1], v_data[2], c_data)
         data_list.append(data)
     return data_list
-
 
 def calc_mean_in_folder(
     dir_path: Path, meas_label: str, log: bool = False
