@@ -14,13 +14,20 @@ from modules.plot import *
 # dir_path_b = Path("./data/bare")
 # data_average_b = calc_mean_in_folder(dir_path_b, "Bare Au", True)
 
-# ninta0ug
-dir_path_0 = Path("./data/ninta0ug")
-data_average_0 = calc_mean_in_folder(dir_path_0, "Ni(Ⅱ)-NTA")
+dir_path_0 = Path("./data/0ng")
+data_average_0 = calc_mean_in_folder(dir_path_0, "0 ng/mL")
 
-# ninta10ug
-dir_path_10 = Path("./data/ninta10ug")
-data_average_10 = calc_mean_in_folder(dir_path_10, "Ni(Ⅱ)-NTA with BSA (10μg/mL)")
+dir_path_1 = Path("./data/1ng")
+data_average_1 = calc_mean_in_folder(dir_path_1, "1 ng/mL")
+
+dir_path_2 = Path("./data/2ng")
+data_average_2 = calc_mean_in_folder(dir_path_2, "2 ng/mL")
+
+dir_path_5 = Path("./data/5ng")
+data_average_5 = calc_mean_in_folder(dir_path_5, "5 ng/mL")
+
+dir_path_10 = Path("./data/10ng")
+data_average_10 = calc_mean_in_folder(dir_path_10, "10 ng/mL")
 
 # dir_path_ba = Path("./data/bare")
 # data_average_ba = calc_mean_in_folder(dir_path_ba, "Au")
@@ -35,6 +42,9 @@ data_list_for_comparison = [
     # data_average_f,
     # data_average_b,
     data_average_0,
+    data_average_1,
+    data_average_2,
+    data_average_5,
     data_average_10,
     # data_average_ba,
     # data_average_be,
@@ -45,9 +55,10 @@ plot_data_list(
     data_list_for_comparison,
     xlabel="Gate Voltage (V)",
     ylabel="Source Current (A)",
-    ylim=[1e-10, 1e-6],
-    title="I-Vg curve of nanotransistor with extended gate (DNA probe)",
+    xlim=[-1.2, -0.7],
+    ylim=[1e-10, 0.6e-6],
+    title="I-Vg curve of Ni-NTA 2",
     xline=-0.5,
 )
 
-save_fig("./20250120.png")
+save_fig("./20250120_sample2_lin.png")

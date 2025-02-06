@@ -36,7 +36,8 @@ def extract_curr_list(raw_data: str) -> np.ndarray:
 def calc_average(
     data_list: list[TransistorData], meas_label: str = ""
 ) -> TransistorData:
-    chip_name = data_list[0].chip_name
+    print(data_list)
+    chip_name = ""
     transistor_name = data_list[0].transistor_name
     v_start = data_list[0].v_start
     v_end = data_list[0].v_end
@@ -91,6 +92,7 @@ def calc_mean_in_folder(
     dir_path: Path, meas_label: str, log: bool = False
 ) -> TransistorData:
     data_list = read_txt_from_folder(dir_path, meas_label)
+    print(data_list)
     if log:
         data_average = calc_geometric_average(data_list, meas_label)
     else:
