@@ -7,3 +7,4 @@ You can run this script by using following commands.
     
     - acquire data from the instrument
         uv run python get.py
+        the data will be saved as csv file.
